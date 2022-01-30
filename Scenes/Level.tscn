@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/WhiteTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/BlackTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Hazard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/LevelEnding.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/GrayOneWayTileMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/GrayTileMap.tscn" type="PackedScene" id=8]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+show_behind_parent = true
+margin_left = -592.0
+margin_top = -374.0
+margin_right = 571.0
+margin_bottom = 427.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 244 )
+
+[node name="BlackTileMap" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray(  )
+
+[node name="WhiteTileMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray(  )
+
+[node name="GrayTileMap" parent="." instance=ExtResource( 8 )]
+tile_data = PoolIntArray(  )
+
+[node name="GrayOneWayTileMap" parent="." instance=ExtResource( 7 )]
+
+[node name="LevelEnding" parent="." instance=ExtResource( 6 )]
+position = Vector2( 348, 120 )
+isGameEnding = true
+
+[node name="Hazard" parent="." instance=ExtResource( 4 )]
