@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/LevelEnding.gd" type="Script" id=1]
+[ext_resource path="res://Sounds/Ending.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Sounds/Level Ending.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 40 )
@@ -31,6 +33,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("LevelEnding:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "open"
@@ -45,6 +59,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LevelEnding:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [node name="LevelEnding" type="Area2D" groups=["LevelEnding"]]
@@ -104,5 +130,13 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/open = SubResource( 2 )
+
+[node name="LevelEnding" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "LevelEnding"
+
+[node name="Ending" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Ending"
 
 [connection signal="body_entered" from="." to="." method="_on_LevelEnding_body_entered"]

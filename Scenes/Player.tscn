@@ -1,8 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/PrimaryStateMachine.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Running.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/Step1.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/Step 2.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/Death.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/Fall.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/Jump.ogg" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 20 )
@@ -92,6 +97,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Step1:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Step2:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -192,6 +221,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Step1:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Step2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "win"
@@ -241,10 +294,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 55, 20 )
+extents = Vector2( 55, 18 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 40, 90 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 20, 5 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 scale = Vector2( 0.25, 0.25 )
@@ -283,7 +339,7 @@ anims/ending = SubResource( 11 )
 
 [node name="HazardBox" type="CollisionShape2D" parent="HazardDetection"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 0, 90 )
+position = Vector2( 0, 85 )
 shape = SubResource( 6 )
 
 [node name="HazardDetection2" type="Area2D" parent="."]
@@ -291,6 +347,13 @@ shape = SubResource( 6 )
 [node name="HazardBox" type="CollisionShape2D" parent="HazardDetection2"]
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 8 )
+
+[node name="HazardDetection3" type="Area2D" parent="."]
+
+[node name="HazardBox" type="CollisionShape2D" parent="HazardDetection3"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, 102 )
+shape = SubResource( 12 )
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -305,7 +368,29 @@ gravity = Vector2( 0, 0 )
 radial_accel = 100.0
 scale_amount = 40.0
 
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Player"
+
+[node name="Fall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "Player"
+
+[node name="Step1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Steps"
+
+[node name="Step2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Steps"
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Death"
+
 [connection signal="area_entered" from="HazardDetection" to="." method="_on_HazardDetection_area_entered"]
 [connection signal="body_entered" from="HazardDetection" to="." method="_on_HazardDetection_body_entered"]
 [connection signal="area_entered" from="HazardDetection2" to="." method="_on_HazardDetection_area_entered"]
 [connection signal="body_entered" from="HazardDetection2" to="." method="_on_HazardDetection_body_entered"]
+[connection signal="area_entered" from="HazardDetection3" to="." method="_on_HazardDetection_area_entered"]
+[connection signal="body_entered" from="HazardDetection3" to="." method="_on_HazardDetection_body_entered"]

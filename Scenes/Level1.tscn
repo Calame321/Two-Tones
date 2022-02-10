@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/WhiteTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Scenes/Level2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Scripts/RichTextLabel.gd" type="Script" id=11]
+[ext_resource path="res://Sounds/Woom.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/Level10.tscn" type="PackedScene" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -52,6 +54,7 @@ tile_data = PoolIntArray( -1245217, 0, 131076, -1245216, 0, 1, -1245215, 0, 1, -
 [node name="LevelEnding" parent="." instance=ExtResource( 6 )]
 position = Vector2( 348, 104 )
 nextLevel = ExtResource( 9 )
+secretLevel = ExtResource( 13 )
 
 [node name="Hazard" parent="." instance=ExtResource( 4 )]
 
@@ -76,3 +79,7 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WOOOM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+bus = "Woom"

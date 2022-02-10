@@ -1,0 +1,80 @@
+[gd_resource type="AudioBusLayout" load_steps=7 format=2]
+
+[sub_resource type="AudioEffectDelay" id=1]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectChorus" id=2]
+resource_name = "Chorus"
+
+[sub_resource type="AudioEffectDelay" id=3]
+resource_name = "Delay"
+tap1/delay_ms = 300.0
+tap1/level_db = -25.0
+tap2/delay_ms = 600.0
+tap2/level_db = -50.0
+
+[sub_resource type="AudioEffectPitchShift" id=4]
+resource_name = "PitchShift"
+pitch_scale = 0.3
+
+[sub_resource type="AudioEffectReverb" id=5]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectReverb" id=6]
+resource_name = "Reverb"
+
+[resource]
+bus/1/name = "Background"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = "Master"
+bus/1/effect/0/effect = SubResource( 1 )
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource( 2 )
+bus/1/effect/1/enabled = true
+bus/2/name = "Player"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -10.5185
+bus/2/send = "Master"
+bus/3/name = "Ending"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = "Master"
+bus/4/name = "Death"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = "Master"
+bus/4/effect/0/effect = SubResource( 3 )
+bus/4/effect/0/enabled = true
+bus/5/name = "Steps"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = "Player"
+bus/5/effect/0/effect = SubResource( 4 )
+bus/5/effect/0/enabled = true
+bus/6/name = "LevelEnding"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = "Ending"
+bus/6/effect/0/effect = SubResource( 5 )
+bus/6/effect/0/enabled = true
+bus/7/name = "Woom"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = -17.0211
+bus/7/send = "Master"
+bus/7/effect/0/effect = SubResource( 6 )
+bus/7/effect/0/enabled = true

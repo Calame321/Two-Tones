@@ -4,6 +4,11 @@ onready var animationPlayer = get_parent().get_node("AnimationPlayer")
 onready var tweenPlayer = get_parent().get_node("TweenPlayer")
 onready var sprite = get_parent().get_node("Sprite")
 onready var deathParticles = get_parent().get_node("DeathParticles")
+onready var sounds = [
+	get_parent().get_node("Jump"),
+	get_parent().get_node("Fall"),
+	get_parent().get_node("Death")
+]
 
 func _ready():
 	add_state("IDLE")
@@ -78,6 +83,7 @@ func _enter_state(new_state, old_state):
 			animationPlayer.play("walk")
 			change_direction()
 		states.JUMP:
+			sounds[0].play()
 			animationPlayer.play("jump")
 			tween_vertical_scale()
 			parent.jump()
@@ -89,6 +95,7 @@ func _enter_state(new_state, old_state):
 			parent.coyote()
 			change_direction()
 		states.DEAD:
+			sounds[2].play()
 			animationPlayer.play("dead")
 			tweenPlayer.interpolate_property(deathParticles, 'color:a', 1, -1, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tweenPlayer.start()
@@ -99,6 +106,7 @@ func _enter_state(new_state, old_state):
 func _exit_state(old_state, new_state):
 	match old_state:
 		states.FALL:
+			sounds[1].play()
 			tween_vertical_scale()
 
 func change_direction():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Sprites/TwitterHovered.png.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/ItchHovered.png.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/TwitchHovered.png.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/Background Sound.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/Background Sound 2.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -410,6 +412,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "Background"
+
+[node name="BackgroundSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "Background"
+
 [connection signal="pressed" from="CanvasLayer/EndingPopup/Twitter" to="." method="_on_Twitter_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndingPopup/Twitch" to="." method="_on_Twitch_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndingPopup/Itch" to="." method="_on_Itch_pressed"]
+[connection signal="finished" from="BackgroundSound" to="." method="_on_BackgroundSound_finished"]
+[connection signal="finished" from="BackgroundSound2" to="." method="_on_BackgroundSound_finished"]

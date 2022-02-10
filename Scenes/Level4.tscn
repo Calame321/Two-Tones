@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/WhiteTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/GrayOneWayTileMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/GrayTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Level5.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sounds/Woom.ogg" type="AudioStream" id=10]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 5 )
@@ -49,3 +50,7 @@ nextLevel = ExtResource( 9 )
 
 [node name="Hazard" parent="." instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 1310688, 0, 0, 1310689, 0, 0, 1310690, 0, 0, 1310691, 0, 0, 1310692, 0, 0, 1310693, 0, 0, 1310694, 0, 0, 1310695, 0, 0, 1310696, 0, 0, 1310697, 0, 0, 1310698, 0, 0, 1310699, 0, 0, 1310700, 0, 0, 1310701, 0, 0, 1310702, 0, 0, 1310703, 0, 0, 1310704, 0, 0, 1310705, 0, 0, 1310706, 0, 0, 1310707, 0, 0, 1310708, 0, 0, 1310709, 0, 0, 1310710, 0, 0, 1310711, 0, 0, 1310712, 0, 0, 1310713, 0, 0, 1310714, 0, 0, 1310715, 0, 0, 1310716, 0, 0, 1310717, 0, 0, 1310718, 0, 0, 1310719, 0, 0, 1245184, 0, 0, 1245185, 0, 0, 1245186, 0, 0, 1245187, 0, 0, 1245188, 0, 0, 1245189, 0, 0, 1245190, 0, 0, 1245191, 0, 0, 1245192, 0, 0, 1245193, 0, 0, 1245194, 0, 0, 1245195, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1245204, 0, 0, 1245205, 0, 0, 1245206, 0, 0, 1245207, 0, 0, 1245208, 0, 0, 1245209, 0, 0, 1245210, 0, 0, 1245211, 0, 0, 1245212, 0, 0, 1245213, 0, 0, 1245214, 0, 0, 1245215, 0, 0 )
+
+[node name="WOOOM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "Woom"
