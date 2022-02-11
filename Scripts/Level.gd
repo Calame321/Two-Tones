@@ -12,6 +12,7 @@ onready var woom = get_node("WOOOM")
 var tweenCompleted = true
 
 func _ready():
+	$Camera2D/ColorRect.visible = true
 	check_background_color()
 	match backgroundColor:
 		color.BLACK:
